@@ -1,0 +1,59 @@
+1. List all orders that have a product with a rating greater than 4, along with the product name and rating.  
+ 
+=> SELECT order_id, product_name, rating FROM review NATURAL JOIN product where rating>4;
+
+
+2. List the user id  and transaction id whose order total is greater than 1000.
+ 
+=> SELECT t.user_id, t.transaction_id
+   FROM transactions t NATURAL JOIN order_summary o
+   WHERE o.order_total > 1000;
+
+
+3. List the order id whose refund reason is not mentioned.
+ 
+=> SELECT order_id FROM return_item WHERE refund_reason=NULL;
+
+
+4. List all user info whose transaction status is failed.
+ 
+=> SELECT u.* FROM user_info NATURAL JOIN transactions WHERE transaction_status=’Failed’;
+
+
+5. Retrieve the details of all the users who have made a transaction on a specific date (T_DATE).
+
+=> SELECT DISTINCT ui.* FROM user_info ui NATURAL JOIN transactions tr WHERE tr.t_date='2023-04-20';
+
+
+6. Retrieve the total amount of refund processed on a specific date (REFUND_DATE).
+ 
+=> SELECT order_id,refund_reason, SUM(refund_amount) AS total_refund_amount FROM return_item WHERE refund_date='2023-04-24' GROUP BY order_id, refund_reason ;
+
+
+7. Retrieve the names and email addresses of all users who have placed orders but have not written any reviews.
+ 
+=> SELECT DISTINCT ui.name1, ui.email FROM user_info ui NATURAL JOIN TRANSACTIONS TR WHERE transaction_id NOT IN (SELECT order_id FROM review);
+
+
+8. Retrieve the names and total amount spent of all users who have spent more than $500 in total.
+
+=>  SELECT ui.name, SUM(tr.transaction_amount) AS total_spent 
+    FROM user_info ui NATURAL JOIN transactions tr GROUP BY ui.name
+    HAVING SUM(tr.transaction_amount)>500;
+
+
+9. Retrieve the names and email addresses of all users who have written reviews for all the products they have purchased.
+ 
+=>  SELECT DISTINCT ui.name, ui.email FROM user_info ui NATURAL JOIN transactions tr 
+    NATURAL JOIN order_summary os NATURAL JOIN order_items oi
+    WHERE ui.user_id NOT IN (
+    SELECT DISTINCT ui.user_id FROM user_info ui NATURAL JOIN transactions tr NATURAL JOIN order_summary os NATURAL JOIN order_items oi
+    LEFT JOIN review r ON r.product_id = oi.product_id AND r.order_id = os.order_id AND r.order_id IS NOT NULL WHERE r.review_id  IS NULL );
+
+
+10. Retrieve the names and email addresses of all users who have placed orders with a delivery charge of more than $10.
+
+=> SELECT DISTINCT ui.name1, ui.email 
+   FROM user_info ui 
+   NATURAL JOIN transactions tr NATURAL JOIN order_summary os NATURAL JOIN fee_breakdown fb
+   WHERE fb.delivery_charge > 10;

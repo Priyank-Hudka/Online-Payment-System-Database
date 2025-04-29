@@ -1,0 +1,114 @@
+CREATE SCHEMA Online_Payment_System;
+SET SEARCH_PATH TO Online_Payment_System;
+
+CREATE TABLE USER_INFO (
+	user_id varchar(20),
+	name1 varchar(20),
+	email varchar(40),
+	user_name varchar(20) NOT NULL UNIQUE,
+	password1 varchar(20),
+	phone_no varchar(20),
+	age integer,
+	PRIMARY KEY (user_id)
+);
+CREATE TABLE TRANSACTIONS (
+	user_id varchar(20) NOT NULL ,
+	transaction_id varchar(20),
+	t_date date,
+	t_time time,
+	t_amount decimal(6,2),
+	payment_method varchar(20),
+	transaction_status varchar(20),
+	FOREIGN KEY(user_id) REFERENCES USER_INFO(user_id)
+	ON DELETE SET DEFAULT ON UPDATE CASCADE,
+	PRIMARY KEY(transaction_id)
+);
+CREATE TABLE admin_info (
+	admin_id integer,
+	admin_username varchar(20),
+	transaction_id varchar(20) NOT NULL UNIQUE,
+	FOREIGN KEY(transaction_id) REFERENCES TRANSACTIONS(transaction_id)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(admin_id,transaction_id)
+);
+CREATE TABLE RETURN_ITEM (
+	order_id varchar(20) NOT NULL,
+	refund_id varchar(20),
+	refund_date date,
+	refund_amount decimal(6,2),
+	refund_reason varchar(40),
+	FOREIGN KEY(order_id) REFERENCES TRANSACTIONS(transaction_id)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(refund_id)
+);
+CREATE TABLE FEE_BREAKDOWN (
+	fee_id varchar(30),
+	delivery_charge decimal(6,2),
+	gst_tax decimal(6,2),
+	order_amount decimal(6,2),
+	PRIMARY KEY(fee_id)
+);
+CREATE TABLE COUPON (
+	coupon_id varchar(30),
+	coupon_code varchar(30) NOT NULL UNIQUE,
+	discount_type varchar(20),
+	discount_amount decimal(6,2),
+	PRIMARY KEY(coupon_id)
+);
+CREATE TABLE SHIPPING_DETAILS (
+	shipping_id varchar(30),
+	shipping_date date,
+	country varchar(30),
+	state1 varchar(30),
+	city varchar(30),
+	pincode integer,
+	delivery_area varchar(30),
+	PRIMARY KEY(shipping_id)
+);
+CREATE TABLE PRODUCT (
+	product_id varchar(30),
+	product_name varchar(30),
+	product_rate decimal(6,2),
+	stock integer,
+	product_type varchar(30),
+	average_purchase_price decimal(6,2),
+	PRIMARY KEY(product_id)
+);
+CREATE TABLE ORDER_DETAILS (
+	order_id varchar(30) NOT NULL,
+	product_id varchar(30) NOT NULL ,
+	qty integer,
+	total_price decimal(6,2),
+	FOREIGN KEY(product_id) REFERENCES PRODUCT(product_id)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(order_id,product_id),
+	FOREIGN KEY(order_id) REFERENCES ORDER_SUMMARY(order_id) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE REVIEW (
+	review_id varchar(30),
+	order_id varchar(30) NOT NULL ,
+	product_id varchar(30) NOT NULL ,
+	rating decimal(2,1),
+	feedback varchar(100),
+	FOREIGN KEY(order_id,product_id) REFERENCES ORDER_DETAILS(order_id,product_id)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(review_id)
+);
+CREATE TABLE ORDER_SUMMARY (
+	transaction_id varchar(30) NOT NULL ,
+	order_id varchar(30) NOT NULL UNIQUE,
+	order_status varchar(30),
+	shipping_id varchar(30) NOT NULL UNIQUE,
+	fee_id varchar(30) NOT NULL UNIQUE,
+	coupon_id varchar(30),
+	order_total decimal(6,2),
+	FOREIGN KEY(transaction_id) REFERENCES TRANSACTIONS(transaction_id)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(shipping_id) REFERENCES SHIPPING_DETAILS(shipping_id) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(fee_id) REFERENCES FEE_BREAKDOWN(fee_id) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(coupon_id) REFERENCES COUPON(coupon_id) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);

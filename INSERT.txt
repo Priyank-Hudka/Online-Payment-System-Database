@@ -1,0 +1,176 @@
+INSERT INTO user_info (user_id, name1, email, user_name, password1, phone_no, age)
+VALUES
+('UX1', 'Aditi Gupta', 'aditi.gupta@example.com', 'aditigupta', 'mypassword', '1237456890', 25),
+('UX2', 'Arjun Singh', 'arjun.singh@example.com', 'arjunsingh', 'mypassword123', '9876543210', 30),
+('UX3', 'Divya Patel', 'divya.patel@example.com', 'divyapatel', 'password1', '5551234567', 35),
+('UX4', 'Kunal Sharma', 'kunal.sharma@example.com', 'kunalsharma', 'password2', '5559876543', 42),
+('UX5', 'Neha Shah', 'neha.shah@example.com', 'nehashah', 'password3', '5555555555', 20),
+('UX6', 'Rahul Desai', 'rahul.desai@example.com', 'rahuldesai', 'password4', '5551112222', 28),
+('UX7', 'Priya Joshi', 'priya.joshi@example.com', 'priyajoshi', 'password5', '5554443333', 45),
+('UX8', 'Vikram Singhania', 'vikram.singhania@example.com', 'vikramsinghania', 'password6', '5557778888', 31),
+('UX9', 'Swati Gupta', 'swati.gupta@example.com', 'swatigupta', 'password7', '5551990000', 39),
+('UX10', 'Amit Patel', 'amit.patel@example.com', 'amitpatel', 'password8', '5552223333', 26);
+
+INSERT INTO transactions (user_id, transaction_id, t_date, t_time, t_amount, payment_method, transaction_status)
+VALUES 
+('UX1', 'TRX001', '2023-04-20', '14:30:00', 1329.17, 'Credit Card', 'Success'),
+('UX1', 'TRX002', '2023-04-21', '10:15:00', 1525.71, 'Debit Card', 'Success'),
+('UX2', 'TRX003', '2023-04-21', '12:00:00', 2181.09, 'PayPal', 'Pending'),
+('UX2', 'TRX004', '2023-04-20', '16:45:00', 560.95, 'Credit Card', 'Success'),
+('UX3', 'TRX005', '2023-04-19', '11:30:00', 1658.03, 'Debit Card', 'Failed');
+
+INSERT INTO admin_info (admin_id, admin_username, transaction_id)
+VALUES 
+(1, 'admin1', 'TRX001'),
+(1, 'admin1', 'TRX002'),
+(2, 'admin2', 'TRX003'),
+(2, 'admin2', 'TRX004'),
+(3, 'admin3', 'TRX005');
+
+
+INSERT INTO return_item (order_id, refund_id, refund_date, refund_amount, refund_reason)
+VALUES
+('ORD001', 'RF001', '2023-04-22', 145.95, 'Wrong Item'),
+('ORD002', 'RF002', '2023-04-23', 76.88, 'Defective Item'),
+('ORD007', 'RF003', '2023-04-24', 660.47, 'Not as Described'),
+('ORD013', 'RF004', '2023-04-25', 1173.36, 'Change of Mind');
+
+
+INSERT INTO fee_breakdown (fee_id, delivery_charge, gst_tax, order_amount)
+VALUES
+('FEE001', 6.90, 7.09, 141.97),
+('FEE002', 7.90, 3.99, 79.99),
+('FEE003', 8.90, 52.49, 1049.94),
+('FEE004', 5.99, 44.99, 899.99),
+('FEE005', 1.99, 14.99, 299.98),
+('FEE006', 2.90, 56.49, 1129.97),
+('FEE007', 4.00, 31.49, 629.98),
+('FEE008', 11.50, 17.49, 349.96),
+('FEE009', 4.20, 57.49, 1149.98),
+('FEE010', 0.99, 22.49, 449.96),
+('FEE011', 2.50, 3.99, 79.99),
+('FEE012', 4.00, 1.04, 20.99),
+('FEE013', 6.90, 56.49, 1129.97),
+('FEE014', 3.99, 12.49, 249.99),
+('FEE015', 1.00, 11.04, 220.98);
+
+
+INSERT INTO coupon (coupon_id, coupon_code, discount_type, discount_amount)
+VALUES
+('CPN001', 'SALE10', 'percentage', 10.00),
+('CPN002', 'NEWUSER15', 'percentage', 15.00),
+('CPN003', 'FREESHIP', 'flat', 5.00),
+('CPN004', 'BULK20', 'percentage', 20.00),
+('CPN005', 'FIRSTBUY', 'flat', 10.00),
+('CPN006', 'BOGO', 'free', 1),
+('CPN007', 'FABFIVE', 'flat', 5.00),
+('CPN008', 'SUMMER20', 'percentage', 20.00),
+('CPN009', 'HALFOFF', 'percentage', 50.00),
+('CPN010', '10OFF100', 'conditional', 10.00);
+
+INSERT INTO shipping_details (shipping_id, shipping_date, country, state1, city, pincode, delivery_area)
+VALUES
+('SHIP001', '2022-01-01', 'India', 'Karnataka', 'Bengaluru', '560001', 'MG Road'),
+('SHIP002', '2022-01-02', 'India', 'Tamil Nadu', 'Chennai', '600001', 'Mount Road'),
+('SHIP003', '2022-01-03', 'India', 'Kerala', 'Thiruvananthapuram', '695001', 'Pattom'),
+('SHIP004', '2022-01-04', 'India', 'West Bengal', 'Kolkata', '700001', 'Esplanade'),
+('SHIP005', '2022-01-05', 'India', 'Rajasthan', 'Jaipur', '302001', 'MI Road'),
+('SHIP006', '2022-01-06', 'India', 'Uttar Pradesh', 'Lucknow', '226001', 'Hazratganj'),
+('SHIP007', '2022-01-07', 'India', 'Punjab', 'Amritsar', '143001', 'Hall Bazaar'),
+('SHIP008', '2022-01-08', 'India', 'Assam', 'Guwahati', '781001', 'Pan Bazaar'),
+('SHIP009', '2022-01-09', 'India', 'Telangana', 'Hyderabad', '500001', 'Abids'),
+('SHIP010', '2022-01-10', 'India', 'Gujarat', 'Ahmedabad', '380001', 'Ashram Road'),
+('SHIP011', '2022-01-11', 'India', 'Maharashtra', 'Mumbai', '400001', 'Fort'),
+('SHIP012', '2022-01-12', 'India', 'Uttar Pradesh', 'Agra', '282001', 'Sanjay Place'),
+('SHIP013', '2022-01-13', 'India', 'Karnataka', 'Mangalore', '575001', 'Hampankatta'),
+('SHIP014', '2022-01-14', 'India', 'Haryana', 'Gurugram', '122001', 'MG Road'),
+('SHIP015', '2022-01-15', 'India', 'Gujarat', 'Vadodara', '390001', 'Sayajigunj');
+
+INSERT INTO product (product_id, product_name, product_rate, stock, product_type, average_purchase_price)
+VALUES
+('P001', 'T-Shirt', 20.99, 100, 'Clothing', 22.50),
+('P002', 'Jeans', 49.99, 50, 'Clothing', 55.00),
+('P003', 'Sneakers', 79.99, 25, 'Footwear', 85.00),
+('P004', 'Running Shoes', 99.99, 20, 'Footwear', 110.00),
+('P005', 'Smartphone', 599.99, 30, 'Electronics', 650.00),
+('P006', 'Tablet', 399.99, 15, 'Electronics', 425.00),
+('P007', 'Laptop', 899.99, 10, 'Electronics', 950.00),
+('P008', 'Dress Shirt', 39.99, 75, 'Clothing', 42.50),
+('P009', 'Sweater', 49.99, 50, 'Clothing', 52.50),
+('P010', 'Winter Jacket', 149.99, 30, 'Clothing', 160.00),
+('P011', 'Leather Shoes', 129.99, 20, 'Footwear', 140.00),
+('P012', 'Sandals', 29.99, 40, 'Footwear', 32.50),
+('P013', 'Smartwatch', 199.99, 25, 'Electronics', 210.00),
+('P014', 'Wireless Headphones', 149.99, 35, 'Electronics', 160.00),
+('P015', 'Desktop Computer', 899.99, 10, 'Electronics', 950.00),
+('P016', 'Gaming Console', 499.99, 15, 'Electronics', 550.00),
+('P017', 'Wireless Router', 79.99, 25, 'Electronics', 85.00),
+('P018', 'DBMS TextBook', 249.99, 25, 'Books', 285.00);
+
+
+INSERT INTO order_details (order_id, product_id, qty, total_price)
+VALUES
+('ORD001', 'P001', 2, 41.98),
+('ORD001', 'P004', 1, 99.99),
+('ORD002', 'P003', 1, 79.99),
+('ORD003', 'P002', 3, 149.97),
+('ORD003', 'P005', 1, 99.99),
+('ORD003', 'P006', 2, 799.98),
+('ORD004', 'P007', 1, 899.99),
+('ORD005', 'P010', 2, 299.98),
+('ORD006', 'P012', 1, 29.99),
+('ORD006', 'P013', 1, 199.99),
+('ORD006', 'P015', 1, 899.99),
+('ORD007', 'P011', 1, 129.99),
+('ORD007', 'P016', 1, 499.99),
+('ORD008', 'P008', 1, 39.99),
+('ORD008', 'P014', 1, 149.99),
+('ORD008', 'P017', 2, 159.98),
+('ORD009', 'P007', 1, 899.99),
+('ORD009', 'P018', 1, 249.99),
+('ORD010', 'P004', 3, 299.97),
+('ORD010', 'P014', 1, 149.99),
+('ORD011', 'P003', 1, 79.99),
+('ORD012', 'P001', 1, 20.99),
+('ORD013', 'P011', 1, 129.99),
+('ORD013', 'P016', 2, 999.98),
+('ORD014', 'P018', 1, 249.99),
+('ORD015', 'P013', 1, 199.99),
+('ORD015', 'P001', 1, 20.99);
+
+INSERT INTO review (review_id, order_id, product_id, rating, feedback)
+VALUES
+('R001', 'ORD001', 'P001', 4.5, 'Great product, arrived on time.'),
+('R002', 'ORD002', 'P003', 3.0, 'Product was okay, delivery was slow.'),
+('R003', 'ORD003', 'P005', 5.0, 'Absolutely love this product!'),
+('R004', 'ORD003', 'P006', 4.0, 'Product was as described, delivery was on time.'),
+('R005', 'ORD005', 'P010', 5.0, 'Amazing product, great value for money.'),
+('R006', 'ORD007', 'P016', 3.5, 'Product was good but overpriced.'),
+('R007', 'ORD008', 'P008', 4.0, 'Happy with the product, arrived on time.'),
+('R008', 'ORD008', 'P017', 4.5, 'Great value for money, product exceeded my expectations.'),
+('R009', 'ORD010', 'P004', 4.0, 'Product was good, but delivery was delayed.'),
+('R010', 'ORD011', 'P003', 5.0, 'Excellent product, exceeded my expectations.'),
+('R011', 'ORD010', 'P014', 2.5, 'Product was not as described, disappointed with the purchase.'),
+('R012', 'ORD013', 'P016', 3.5, 'Product was okay, delivery could have been faster.'),
+('R013', 'ORD013', 'P011', 4.5, 'Great product, arrived on time.'),
+('R014', 'ORD014', 'P018', 5.0, 'Absolutely love this product!'),
+('R015', 'ORD015', 'P013', 4.0, 'Product was as described, happy with the purchase.'),
+('R016', 'ORD015', 'P001', 3.0, 'Product was okay, not the best value for money.');
+
+INSERT INTO ORDER_SUMMARY (transaction_id, order_id, order_status, shipping_id, fee_id, coupon_id, order_total)
+VALUES
+('TRX001', 'ORD001', 'Processing', 'SHIP001', 'FEE001', 'CPN001', 145.96),
+('TRX001', 'ORD002', 'Shipped', 'SHIP002', 'FEE002', 'CPN002', 76.88),
+('TRX001', 'ORD003', 'Delivered', 'SHIP003', 'FEE003', 'CPN003', 1106.33),
+('TRX002', 'ORD004', 'Processing', 'SHIP004', 'FEE004', 'CPN004', 930.97),
+('TRX002', 'ORD005', 'Shipped', 'SHIP005', 'FEE005', 'CPN005', 306.96),
+('TRX002', 'ORD006', 'Delivered', 'SHIP006', 'FEE006', 'CPN006',594.68 ),
+('TRX003', 'ORD007', 'Processing', 'SHIP007', 'FEE007', 'CPN007', 660.47),
+('TRX003', 'ORD008', 'Shipped', 'SHIP008', 'FEE008', 'CPN008', 358.95),
+('TRX003', 'ORD009', 'Delivered', 'SHIP009', 'FEE009', 'CPN009', 1161.67),
+('TRX004', 'ORD010', 'Processing', 'SHIP010', 'FEE010', 'CPN010', 463.44),
+('TRX004', 'ORD011', 'Shipped', 'SHIP011', 'FEE011', 'CPN003', 81.48),
+('TRX004', 'ORD012', 'Delivered', 'SHIP012', 'FEE012', 'CPN005', 16.03),
+('TRX005', 'ORD013', 'Processing', 'SHIP013', 'FEE013', 'CPN008', 1173.36),
+('TRX005', 'ORD014', 'Shipped', 'SHIP014', 'FEE014', 'CPN005', 261.47),
+('TRX005', 'ORD015', 'Delivered', 'SHIP015', 'FEE015', 'CPN005', 223.02);
